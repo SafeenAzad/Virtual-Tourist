@@ -15,7 +15,7 @@ class CollectionViewCell: UICollectionViewCell {
     
     //Get Photos
     
-    func initWithPhoto(_ photo: PhotoMap) {
+    func initWithPhoto(_ photo: Photo) {
         
         if photo.imageData != nil {
             
@@ -33,7 +33,7 @@ class CollectionViewCell: UICollectionViewCell {
     
     //Download Images
     
-    func downloadImage(_ photo: PhotoMap) {
+    func downloadImage(_ photo: Photo) {
         
         URLSession.shared.dataTask(with: URL(string: photo.imageURL!)!) { (data, response, error) in
             if error == nil {
@@ -53,7 +53,7 @@ class CollectionViewCell: UICollectionViewCell {
     
     //Save Images
     
-    func saveImageDataToCoreData(photo: PhotoMap, imageData: NSData) {
+    func saveImageDataToCoreData(photo: Photo, imageData: NSData) {
         do {
             photo.imageData = imageData
             let delegate = UIApplication.shared.delegate as! AppDelegate
