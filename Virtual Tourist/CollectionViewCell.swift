@@ -23,6 +23,7 @@ class CollectionViewCell: UICollectionViewCell {
                 
                 self.imageView.image = UIImage(data: photo.imageData! as Data)
                 self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
             }
             
         } else {
@@ -35,7 +36,7 @@ class CollectionViewCell: UICollectionViewCell {
     
     func downloadImage(_ photo: Photo) {
         
-        URLSession.shared.dataTask(with: URL(string: photo.imageURL!)!) { (data, response, error) in
+       let dataTask = URLSession.shared.dataTask(with: URL(string: photo.imageURL!)!) { (data, response, error) in
             if error == nil {
                 
                 DispatchQueue.main.async {
@@ -48,7 +49,7 @@ class CollectionViewCell: UICollectionViewCell {
             
             }
             
-            .resume()
+            dataTask.resume()
     }
     
     //Save Images

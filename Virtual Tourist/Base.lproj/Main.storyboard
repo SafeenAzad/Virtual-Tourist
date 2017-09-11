@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -25,7 +26,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <gestureRecognizers/>
                             </mapView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AVz-ei-hFw" userLabel="Delete Pins">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to delete Pins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AVz-ei-hFw" userLabel="Delete Pins">
                                 <rect key="frame" x="0.0" y="611" width="375" height="56"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -74,7 +75,7 @@
                                 </constraints>
                             </mapView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="l6C-TX-9JE">
-                                <rect key="frame" x="0.0" y="210" width="375" height="413"/>
+                                <rect key="frame" x="0.0" y="210" width="375" height="419"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lJY-oc-f5l" userLabel="Flow Layout">
                                     <size key="itemSize" width="115" height="115"/>
@@ -119,24 +120,19 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yeD-3r-yPe">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                                <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="5JF-Nz-DRW"/>
-                                    <barButtonItem title="New Collection" id="cYh-C8-ZGp">
-                                        <connections>
-                                            <action selector="newCollectionAction:" destination="3gF-Od-qrl" id="gv3-SO-ccd"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="M7N-0h-uQB"/>
-                                </items>
-                            </toolbar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gey-Gt-3YV">
+                                <rect key="frame" x="16" y="637" width="343" height="30"/>
+                                <state key="normal" title="New Collection"/>
+                                <connections>
+                                    <action selector="newCollectionAction:" destination="3gF-Od-qrl" eventType="touchUpInside" id="qrP-Qv-EFq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="SZY-F1-R5k" firstAttribute="leading" secondItem="mbb-C8-cEp" secondAttribute="leading" id="4z9-iw-Kt3"/>
-                            <constraint firstItem="yeD-3r-yPe" firstAttribute="top" secondItem="l6C-TX-9JE" secondAttribute="bottom" id="5Ol-4b-Ksa"/>
                             <constraint firstAttribute="trailing" secondItem="l6C-TX-9JE" secondAttribute="trailing" id="6ac-ga-Hyl"/>
+                            <constraint firstItem="akN-qJ-0zU" firstAttribute="top" secondItem="gey-Gt-3YV" secondAttribute="bottom" id="7Ic-7t-fuz"/>
                             <constraint firstAttribute="trailing" secondItem="SZY-F1-R5k" secondAttribute="trailing" id="9Yv-wB-S45"/>
                             <constraint firstItem="l6C-TX-9JE" firstAttribute="top" secondItem="SZY-F1-R5k" secondAttribute="bottom" constant="8" id="9bL-Ky-jAE"/>
                             <constraint firstAttribute="trailing" secondItem="l6C-TX-9JE" secondAttribute="trailing" id="CPJ-do-AMO"/>
@@ -147,18 +143,16 @@
                             <constraint firstItem="l6C-TX-9JE" firstAttribute="top" secondItem="SZY-F1-R5k" secondAttribute="bottom" constant="8" id="aR1-hS-TrA"/>
                             <constraint firstItem="l6C-TX-9JE" firstAttribute="leading" secondItem="mbb-C8-cEp" secondAttribute="leading" id="b1u-CS-OX1"/>
                             <constraint firstItem="l6C-TX-9JE" firstAttribute="top" secondItem="SZY-F1-R5k" secondAttribute="bottom" constant="8" id="cVd-Dv-IUt"/>
-                            <constraint firstAttribute="trailing" secondItem="yeD-3r-yPe" secondAttribute="trailing" id="cd4-k5-rHg"/>
-                            <constraint firstItem="yeD-3r-yPe" firstAttribute="top" secondItem="l6C-TX-9JE" secondAttribute="bottom" id="jk4-wh-R8Q"/>
-                            <constraint firstItem="yeD-3r-yPe" firstAttribute="leading" secondItem="mbb-C8-cEp" secondAttribute="leading" id="sW0-d3-yMv"/>
-                            <constraint firstItem="yeD-3r-yPe" firstAttribute="top" secondItem="l6C-TX-9JE" secondAttribute="bottom" id="tCW-Ty-0Ps"/>
-                            <constraint firstItem="akN-qJ-0zU" firstAttribute="top" secondItem="yeD-3r-yPe" secondAttribute="bottom" id="tFF-6A-M7X"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gey-Gt-3YV" secondAttribute="trailing" id="han-Ac-zRD"/>
+                            <constraint firstItem="gey-Gt-3YV" firstAttribute="top" secondItem="l6C-TX-9JE" secondAttribute="bottom" constant="8" id="jjD-gz-R0N"/>
+                            <constraint firstItem="gey-Gt-3YV" firstAttribute="leading" secondItem="mbb-C8-cEp" secondAttribute="leadingMargin" id="mep-ZI-Fjc"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="l6C-TX-9JE" id="fFS-15-Tq1"/>
                         <outlet property="flowLayout" destination="lJY-oc-f5l" id="OZg-np-513"/>
                         <outlet property="mapView" destination="SZY-F1-R5k" id="0YH-ne-PYs"/>
-                        <outlet property="newCollectionButton" destination="yeD-3r-yPe" id="vLa-Tk-XfE"/>
+                        <outlet property="newCollectionButton" destination="gey-Gt-3YV" id="2Ui-3o-0kM"/>
                         <outlet property="noPhotos" destination="17r-MI-2qU" id="Ale-Oo-58U"/>
                     </connections>
                 </viewController>

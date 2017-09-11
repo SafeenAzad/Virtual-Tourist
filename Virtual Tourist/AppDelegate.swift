@@ -14,12 +14,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let stack = CoreDataStack(modelName: "Model")!
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        return true
+    func checkIfFirstLaunch(){
+        if( UserDefaults.standard.bool(forKey: "HasLaunchedBefore") ){
+            print("App has launched before.")
+        }else{
+            print("This is the first launch ever!")
+            UserDefaults.standard.set(true, forKey: "HasLauchedBefore")
+            UserDefaults.standard.synchronize()
+        }
     }
     
-    
-    
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        checkIfFirstLaunch()
+        return true
+    }
     
 }
 

@@ -68,8 +68,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        deletePins.isHidden = true
         
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(addAnnotationOnLongPress(gesture:)))
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.addAnnotationOnLongPress(gesture:)))
         longPressGesture.minimumPressDuration = 0.5
         self.mapView.addGestureRecognizer(longPressGesture)
         
@@ -101,21 +103,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-    //Gesture Recognizer
-    
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        
-        //gestureBegin = true
-        print("Recognizer")
-        return true
-    }
     
     //Map View Function
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        print("didSelect")
+        
         if !editMode {
-            
+            deletePins.isHidden = true
             performSegue(withIdentifier: "PinPhotos", sender: view.annotation?.coordinate)
             
             mapView.deselectAnnotation(view.annotation, animated: false)
@@ -206,7 +200,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             for pin in currentPins {
                 
                 if pin.latitude == coord.latitude && pin.longitude == coord.longitude {
-                    
+                    print("selected pin: \(pin)")
                     destination.coreDataPin = pin
                     break
                 }
