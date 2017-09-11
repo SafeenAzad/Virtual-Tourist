@@ -64,13 +64,38 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        let defaults = UserDefaults.standard
+        let locationData = ["lat":mapView.centerCoordinate.latitude
+            , "long":mapView.centerCoordinate.longitude
+            , "latDelta":mapView.region.span.latitudeDelta
+            , "longDelta":mapView.region.span.longitudeDelta]
+        defaults.set(locationData, forKey: "location")
+    }
+    
     //View Did Load
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        deletePins.isHidden = true
+        let defaults = UserDefaults.standard
+        if  let lat = defaults.value(forKey: "lat"),
+            let long = defaults.value(forKey: "long"),
+            let latDelta = defaults.value(forKey: "latDelta"),
+            let longDelta = defaults.value(forKey: "longDelta")
+            
+        {
+            let center: CLLocationCoordinate2D = CLLocationCoordinate2DMake(lat as! Double, long as! Double)
+            let span: MKCoordinateSpan = MKCoordinateSpanMake(latDelta as! Double, longDelta as! Double)
+            let region: MKCoordinateRegion = MKCoordinateRegionMake(center, span)
+            mapView.setRegion(region, animated: true)
+        }
         
+        
+        
+        deletePins.isHidden = true
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.addAnnotationOnLongPress(gesture:)))
         longPressGesture.minimumPressDuration = 0.5
         self.mapView.addGestureRecognizer(longPressGesture)
@@ -127,7 +152,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     // Add Pin
     func addAnnotationOnLongPress(gesture: UILongPressGestureRecognizer) {
         
-        if gesture.state == .ended {
+        if gesture.state == .began {
             let point = gesture.location(in: self.mapView)
             let coordinate = self.mapView.convert(point, toCoordinateFrom: self.mapView)
             print(coordinate)
@@ -218,7 +243,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         deletePins.isHidden = !editing
         editMode = editing
     }
-
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        let defaults = UserDefaults.standard
+        defaults.setValue(mapView.centerCoordinate.latitude, forKey: "lat")
+        defaults.setValue(mapView.centerCoordinate.longitude, forKey: "long")
+        defaults.setValue(mapView.region.span.latitudeDelta, forKey: "latDelta")
+        defaults.setValue(mapView.region.span.longitudeDelta, forKey: "longDelta")
+    }
     
 }
 
